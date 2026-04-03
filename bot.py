@@ -67,105 +67,79 @@ FORMAT:
 ---SPLIT---
 
 📡 COIN TO WATCH TODAY
-👀 [Coin name] — [2 line observation, key level to watch]
-
-RULES:
-- Roman Urdu only in Captain's Briefing
-- English everywhere else
-- Confident senior trader tone
-- No extra text outside the format"""
+👀 [Coin name] — [2 line observation, key level to watch]"""
 
     headers = {
         "Authorization": f"Bearer {os.environ['OPENROUTER_KEY']}",
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "HTTP-Referer": "https://github.com/future-admiral-bot",
+        "X-Title": "Future Admiral Bot"
     }
     body = {
-        "model": "meta-llama/llama-3-8b-instruct:free",
-        "messages": [{"role": "user", "content": prompt}]
+        "model": "mistralai/mistral-7b-instruct:free",
+        "messages": [{"role": "user", "content": prompt}],
+        "max_tokens": 1000
     }
-    r = requests.post(
-        "https://openrouter.ai/api/v1/chat/completions",
-        headers=headers,
-        json=body
-    )
-    return r.json()['choices'][0]['message']['content']
 
-def build_message(prices, fg_value, fg_label, ai_text):
+    try:
+        r = requests.post(
+            "https://openrouter.ai/api/v1/chat/completions",
+            headers=headers,
+            json=body,
+            timeout=30
+        )
+        print(f"OpenRouter status: {r.status_code}")
+        print(f"OpenRouter response: {r.text[:300]}")
+        
+        data = r.json()
+        
+        if 'choices' in data:
+            return data['choices'][0]['message']['content']
+        elif 'error' in data:
+            print(f"API Error: {data['error']}")
+            return get_fallback_analysis(prices)
+        else:
+            print(f"Unexpected response: {data}")
+            return get_fallback_analysis(prices)
+            
+    except Exception as e:
+        print(f"Exception: {e}")
+        return get_fallback_analysis(prices)
+
+
+def get_fallback_analysis(prices):
     btc = prices['bitcoin']
-    eth = prices['ethereum']
-    sol = prices['solana']
+    change = btc['usd_24h_change']
+    direction = "upar" if change > 0 else "neeche"
+    
+    return f"""👨‍✈️ CAPTAIN'S BRIEFING (Roman Urdu)
+▸ BTC ${btc['usd']:,} par trade kar raha hai, 24h mein {abs(change):.1f}% {direction} gaya hai. Market carefully observe karo.
+▸ Bina proper analysis ke trade mat karo — capital protect karna pehli priority hai.
+▸ TRAP SE BACHEIN: Sirf confirmed breakout par hi entry lo, emotion mein mat aao.
 
-    parts = ai_text.split("---SPLIT---")
-    briefing = parts[0].strip() if len(parts) > 0 else ""
-    technical = parts[1].strip() if len(parts) > 1 else ""
-    orders    = parts[2].strip() if len(parts) > 2 else ""
-    coin      = parts[3].strip() if len(parts) > 3 else ""
+---SPLIT---
 
-    bar = make_progress_bar(fg_value)
-    now = datetime.now().strftime("%A, %d %B %Y")
+🔬 TECHNICAL ANALYSIS
+🔴 Resistance → Key levels monitor karein
+🟢 Support    → Recent lows watch karein
+📉 Flush Zone → Support break hone par caution
 
-    message = f"""🌅 Assalam-o-Alaikum & Good Morning!
-🚢 Future Admiral Family — Discipline is the Strategy.
+📌 Key Observations:
+- Market volatility high — position sizing dhyan se karo
+- BTC Dominance high hone par Alts pe pressure rahega
+- RSI neutral zone mein — koi bhi side move possible
+- Volume confirmation zaroor dekho entry se pehle
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-     ⚓ FUTURE ADMIRAL
-     MARKET INTELLIGENCE DESK
-     📅 {now}
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+---SPLIT---
 
-{briefing}
+⚔️ ADMIRAL'S ORDERS
+✅ Apna trading plan follow karo
+✅ Stop loss zaroor lagao
+✅ Small position size rakho
+❌ High leverage se door raho
+❌ FOMO mein entry mat lo
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📊 MARKET SNAPSHOT
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🟠 BTC   ${btc['usd']:,}   {btc['usd_24h_change']:+.2f}%
-🔵 ETH   ${eth['usd']:,}    {eth['usd_24h_change']:+.2f}%
-🟣 SOL   ${sol['usd']:,}     {sol['usd_24h_change']:+.2f}%
-📈 Market Cap  ~$2.4T
+---SPLIT---
 
-😨 Fear & Greed:  {fg_value} — {fg_label}
-   {bar}  Keep emotions in check!
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-{technical}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-{orders}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-{coin}
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚢 Stay disciplined. Stay in the fleet.
-⚓ Future Admiral — Har Roz. Har Trade.
-🔔 Next update: Kal 9:00 AM PKT
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"""
-
-    return message
-
-def send_to_discord(message):
-    webhook = os.environ['DISCORD_WEBHOOK']
-    data = {
-        "content": message,
-        "username": "Future Admiral ⚓",
-        "avatar_url": "https://i.imgur.com/4M34hi2.png"
-    }
-    r = requests.post(webhook, json=data)
-    print(f"Discord response: {r.status_code}")
-
-# --- Run ---
-print("Fetching prices...")
-prices = get_prices()
-
-print("Fetching Fear & Greed...")
-fg_value, fg_label = get_fear_greed()
-
-print("Getting AI analysis...")
-ai_text = get_ai_analysis(prices)
-
-print("Building message...")
-message = build_message(prices, fg_value, fg_label, ai_text)
-
-print("Sending to Discord...")
-send_to_discord(message)
-print("✅ Done!")
+📡 COIN TO WATCH TODAY
+👀 Bitcoin (BTC) — Key levels pe nazar rakho. Confirmation ke baad hi move karo."""
