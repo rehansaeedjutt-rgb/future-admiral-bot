@@ -33,38 +33,44 @@ Live Data:
 
 EXACT FORMAT TO FOLLOW:
 
-Assalam-o-Alaikum and Good Morning, my Future Admiral family! Hope you all are disciplined and sticking to the plan. Market is showing some interesting moves, let's break it down.
+🌅 Assalam-o-Alaikum and Good Morning, my Future Admiral family!
+Hope you all are disciplined and sticking to the plan.
+Market is showing some interesting moves, let's break it down.
 
-FUTURE ADMIRAL | MARKET INTELLIGENCE
+⚓ FUTURE ADMIRAL | MARKET INTELLIGENCE
 ━━━━━━━━━━━━━━━━━━━━━
 
 ---SPLIT---
 
-ADMIN ADVICE (Roman Urdu)
-• [2-3 bullet points in Roman Urdu about current BTC situation, OI/Funding rates warning, and trap levels — exactly like a senior trader talking to his community]
+🎙️ ADMIN ADVICE (Roman Urdu)
+• [Roman Urdu — BTC current situation, 2 lines]
+• [Roman Urdu — OI/Funding rates warning]
+• [Roman Urdu — trap level to watch, start with "TRAP SE BACHEIN:"]
 
 ---SPLIT---
 
-CORE MARKET SNAPSHOT
-• Bitcoin (BTC): ${btc['usd']:,} ({btc['usd_24h_change']:+.2f}%)
-• Ethereum (ETH): ${eth['usd']:,} ({eth['usd_24h_change']:+.2f}%)
-• Solana (SOL): ${sol['usd']:,} ({sol['usd_24h_change']:+.2f}%)
-• Market Cap: [estimate]
-• BTC Dominance: [estimate]%
+📊 CORE MARKET SNAPSHOT
+• 🟠 Bitcoin (BTC): ${btc['usd']:,} ({btc['usd_24h_change']:+.2f}%)
+• 🔵 Ethereum (ETH): ${eth['usd']:,} ({eth['usd_24h_change']:+.2f}%)
+• 🟣 Solana (SOL): ${sol['usd']:,} ({sol['usd_24h_change']:+.2f}%)
+• 📈 Market Cap: [estimate]
+• 👑 BTC Dominance: [estimate]%
 
 ---SPLIT---
 
-TECHNICAL ANALYSIS (English)
-• [3 bullet points — resistance/support zones, BTC dominance impact on alts, RSI and liquidity observations — confident senior trader tone]
+🔬 TECHNICAL ANALYSIS
+• 🔴 [Resistance zone observation]
+• 🟢 [Support level observation]
+• 📉 [BTC dominance impact on altcoins]
+• 📌 [RSI and liquidity observation]
 
-Discipline is the key to Wealth.
-Future Admiral
+Discipline is the key to Wealth. ⚓
+— Future Admiral
 
 STRICT RULES:
 - Roman Urdu ONLY in Admin Advice section
 - English everywhere else
-- Bullet points with • symbol only
-- No emojis anywhere
+- Use ONLY the emojis shown in the format above — no extra emojis
 - Confident, senior trader tone throughout
 - Keep it concise exactly like the example"""
 
@@ -113,36 +119,39 @@ def get_fallback_analysis(prices):
     change = btc['usd_24h_change']
     direction = "upar" if change > 0 else "neeche"
 
-    return f"""Assalam-o-Alaikum and Good Morning, my Future Admiral family! Hope you all are disciplined and sticking to the plan. Market is showing some interesting moves, let's break it down.
+    return f"""🌅 Assalam-o-Alaikum and Good Morning, my Future Admiral family!
+Hope you all are disciplined and sticking to the plan.
+Market is showing some interesting moves, let's break it down.
 
-FUTURE ADMIRAL | MARKET INTELLIGENCE
+⚓ FUTURE ADMIRAL | MARKET INTELLIGENCE
 ━━━━━━━━━━━━━━━━━━━━━
 
 ---SPLIT---
 
-ADMIN ADVICE (Roman Urdu)
-• Dosto, BTC is waqt ${btc['usd']:,} ki range mein trade kar raha hai, 24 ghanton mein {abs(change):.1f}% {direction} gaya hai. Market ko carefully observe karo aur jaldi mein koi decision mat lo.
-• Bina proper analysis ke trade mat karo — capital protect karna pehli priority hai. Risk management ko kabhi ignore mat karo.
-• TRAP SE BACHEIN: Sirf confirmed breakout par hi entry lo. Apne jazbaat ko side par rakh kar sirf chart ko follow karein.
+🎙️ ADMIN ADVICE (Roman Urdu)
+• Dosto, BTC is waqt ${btc['usd']:,} ki range mein trade kar raha hai, 24 ghanton mein {abs(change):.1f}% {direction} gaya hai. Market ko carefully observe karo.
+• Open Interest high hai aur Funding Rates positive hain — High Leverage longs se door raho, exchanges pehle unhe nikalte hain.
+• TRAP SE BACHEIN: Sirf confirmed candle close ke baad hi entry lo. Apne jazbaat ko side par rakh kar sirf chart ko follow karein.
 
 ---SPLIT---
 
-CORE MARKET SNAPSHOT
-• Bitcoin (BTC): ${btc['usd']:,} ({btc['usd_24h_change']:+.2f}%)
-• Ethereum (ETH): ${eth['usd']:,} ({eth['usd_24h_change']:+.2f}%)
-• Solana (SOL): ${sol['usd']:,} ({sol['usd_24h_change']:+.2f}%)
-• Market Cap: ~$2.4T
-• BTC Dominance: ~55-57%
+📊 CORE MARKET SNAPSHOT
+• 🟠 Bitcoin (BTC): ${btc['usd']:,} ({btc['usd_24h_change']:+.2f}%)
+• 🔵 Ethereum (ETH): ${eth['usd']:,} ({eth['usd_24h_change']:+.2f}%)
+• 🟣 Solana (SOL): ${sol['usd']:,} ({sol['usd_24h_change']:+.2f}%)
+• 📈 Market Cap: ~$2.4T
+• 👑 BTC Dominance: ~56%
 
 ---SPLIT---
 
-TECHNICAL ANALYSIS (English)
-• BTC is trading at key levels. Watch for resistance and support zones carefully before making any entry. Volume confirmation is essential.
-• BTC Dominance remains elevated — this is a warning sign for Altcoins. If BTC sees any selling pressure, Alts will bleed significantly. Be cautious with altcoin positions.
-• RSI is in neutral territory, giving room for a move in either direction. Look for liquidity sweeps before any major directional move.
+🔬 TECHNICAL ANALYSIS
+• 🔴 BTC facing key resistance — wait for confirmed breakout before entry, volume must step up.
+• 🟢 Watch support levels closely — losing key support could trigger a sharp flush downward.
+• 📉 BTC Dominance elevated — Altcoins under pressure, any BTC dip will cause Alts to bleed heavily.
+• 📌 RSI neutral — room for move in either direction. Liquidity sweep of recent lows likely before major upside.
 
-Discipline is the key to Wealth.
-Future Admiral"""
+Discipline is the key to Wealth. ⚓
+— Future Admiral"""
 
 
 def build_message(prices, fg_value, fg_label, ai_text):
@@ -162,15 +171,14 @@ def build_message(prices, fg_value, fg_label, ai_text):
 ━━━━━━━━━━━━━━━━━━━━━
 
 {snapshot}
-
-Fear & Greed Index: {fg_value} — {fg_label}
+• 😨 Fear & Greed Index: {fg_value} — {fg_label}
 
 ━━━━━━━━━━━━━━━━━━━━━
 
 {analysis}
 
 ━━━━━━━━━━━━━━━━━━━━━
-Date: {now}"""
+🗓️ {now}"""
 
     return message
 
