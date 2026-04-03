@@ -38,7 +38,6 @@ Hope you all are disciplined and sticking to the plan.
 Market is showing some interesting moves, let's break it down.
 
 ⚓ FUTURE ADMIRAL | MARKET INTELLIGENCE
-━━━━━━━━━━━━━━━━━━━━━
 
 ---SPLIT---
 
@@ -119,7 +118,7 @@ Hope you all are disciplined and sticking to the plan.
 Market is showing some interesting moves, let's break it down.
 
 ⚓ FUTURE ADMIRAL | MARKET INTELLIGENCE
-━━━━━━━━━━━━━━━━━━━━━
+
 
 ---SPLIT---
 
@@ -158,11 +157,9 @@ def build_message(ai_text):
 
 {advice}
 
-━━━━━━━━━━━━━━━━━━━━━
 
 {analysis}
 
-━━━━━━━━━━━━━━━━━━━━━
 🗓️ {now}"""
 
     return message
