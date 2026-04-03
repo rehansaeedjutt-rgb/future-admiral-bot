@@ -38,7 +38,6 @@ Hope you all are disciplined and sticking to the plan.
 Market is showing some interesting moves, let's break it down.
 
 ⚓ FUTURE ADMIRAL | MARKET INTELLIGENCE
-━━━━━━━━━━━━━━━━━━━━━
 
 ---SPLIT---
 
@@ -56,6 +55,7 @@ Market is showing some interesting moves, let's break it down.
 • 📌 [RSI and liquidity observation]
 
 Discipline is the key to Wealth. ⚓
+
 — Future Admiral
 
 STRICT RULES:
@@ -113,7 +113,6 @@ Hope you all are disciplined and sticking to the plan.
 Market is showing some interesting moves, let's break it down.
 
 ⚓ FUTURE ADMIRAL | MARKET INTELLIGENCE
-━━━━━━━━━━━━━━━━━━━━━
 
 ---SPLIT---
 
@@ -131,6 +130,7 @@ Market is showing some interesting moves, let's break it down.
 • 📌 RSI neutral — room for move in either direction. Liquidity sweep of recent lows likely before major upside.
 
 Discipline is the key to Wealth. ⚓
+
 — Future Admiral"""
 
 
@@ -147,11 +147,11 @@ def build_message(ai_text):
 
 {advice}
 
-━━━━━━━━━━━━━━━━━━━━━
+
 
 {analysis}
 
-━━━━━━━━━━━━━━━━━━━━━
+
 🗓️ {now}"""
 
     return message
