@@ -49,15 +49,6 @@ Market is showing some interesting moves, let's break it down.
 
 ---SPLIT---
 
-📊 CORE MARKET SNAPSHOT
-• 🟠 Bitcoin (BTC): ${btc['usd']:,} ({btc['usd_24h_change']:+.2f}%)
-• 🔵 Ethereum (ETH): ${eth['usd']:,} ({eth['usd_24h_change']:+.2f}%)
-• 🟣 Solana (SOL): ${sol['usd']:,} ({sol['usd_24h_change']:+.2f}%)
-• 📈 Market Cap: [estimate]
-• 👑 BTC Dominance: [estimate]%
-
----SPLIT---
-
 🔬 TECHNICAL ANALYSIS
 • 🔴 [Resistance zone observation]
 • 🟢 [Support level observation]
@@ -114,8 +105,6 @@ STRICT RULES:
 
 def get_fallback_analysis(prices):
     btc = prices['bitcoin']
-    eth = prices['ethereum']
-    sol = prices['solana']
     change = btc['usd_24h_change']
     direction = "upar" if change > 0 else "neeche"
 
@@ -135,15 +124,6 @@ Market is showing some interesting moves, let's break it down.
 
 ---SPLIT---
 
-📊 CORE MARKET SNAPSHOT
-• 🟠 Bitcoin (BTC): ${btc['usd']:,} ({btc['usd_24h_change']:+.2f}%)
-• 🔵 Ethereum (ETH): ${eth['usd']:,} ({eth['usd_24h_change']:+.2f}%)
-• 🟣 Solana (SOL): ${sol['usd']:,} ({sol['usd_24h_change']:+.2f}%)
-• 📈 Market Cap: ~$2.4T
-• 👑 BTC Dominance: ~56%
-
----SPLIT---
-
 🔬 TECHNICAL ANALYSIS
 • 🔴 BTC facing key resistance — wait for confirmed breakout before entry, volume must step up.
 • 🟢 Watch support levels closely — losing key support could trigger a sharp flush downward.
@@ -154,24 +134,18 @@ Discipline is the key to Wealth. ⚓
 — Future Admiral"""
 
 
-def build_message(prices, fg_value, fg_label, ai_text):
+def build_message(ai_text):
     parts = ai_text.split("---SPLIT---")
 
     header   = parts[0].strip() if len(parts) > 0 else ""
     advice   = parts[1].strip() if len(parts) > 1 else ""
-    snapshot = parts[2].strip() if len(parts) > 2 else ""
-    analysis = parts[3].strip() if len(parts) > 3 else ""
+    analysis = parts[2].strip() if len(parts) > 2 else ""
 
     now = datetime.now().strftime("%A, %d %B %Y")
 
     message = f"""{header}
 
 {advice}
-
-━━━━━━━━━━━━━━━━━━━━━
-
-{snapshot}
-• 😨 Fear & Greed Index: {fg_value} — {fg_label}
 
 ━━━━━━━━━━━━━━━━━━━━━
 
@@ -206,7 +180,7 @@ print("Getting AI analysis...")
 ai_text = get_ai_analysis(prices)
 
 print("Building message...")
-message = build_message(prices, fg_value, fg_label, ai_text)
+message = build_message(ai_text)
 
 print("Sending to Discord...")
 send_to_discord(message)
