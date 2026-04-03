@@ -90,9 +90,9 @@ FORMAT:
         )
         print(f"OpenRouter status: {r.status_code}")
         print(f"OpenRouter response: {r.text[:300]}")
-        
+
         data = r.json()
-        
+
         if 'choices' in data:
             return data['choices'][0]['message']['content']
         elif 'error' in data:
@@ -101,7 +101,7 @@ FORMAT:
         else:
             print(f"Unexpected response: {data}")
             return get_fallback_analysis(prices)
-            
+
     except Exception as e:
         print(f"Exception: {e}")
         return get_fallback_analysis(prices)
@@ -111,7 +111,7 @@ def get_fallback_analysis(prices):
     btc = prices['bitcoin']
     change = btc['usd_24h_change']
     direction = "upar" if change > 0 else "neeche"
-    
+
     return f"""👨‍✈️ CAPTAIN'S BRIEFING (Roman Urdu)
 ▸ BTC ${btc['usd']:,} par trade kar raha hai, 24h mein {abs(change):.1f}% {direction} gaya hai. Market carefully observe karo.
 ▸ Bina proper analysis ke trade mat karo — capital protect karna pehli priority hai.
@@ -143,3 +143,86 @@ def get_fallback_analysis(prices):
 
 📡 COIN TO WATCH TODAY
 👀 Bitcoin (BTC) — Key levels pe nazar rakho. Confirmation ke baad hi move karo."""
+
+
+def build_message(prices, fg_value, fg_label, ai_text):
+    btc = prices['bitcoin']
+    eth = prices['ethereum']
+    sol = prices['solana']
+
+    parts = ai_text.split("---SPLIT---")
+    briefing  = parts[0].strip() if len(parts) > 0 else ""
+    technical = parts[1].strip() if len(parts) > 1 else ""
+    orders    = parts[2].strip() if len(parts) > 2 else ""
+    coin      = parts[3].strip() if len(parts) > 3 else ""
+
+    bar = make_progress_bar(fg_value)
+    now = datetime.now().strftime("%A, %d %B %Y")
+
+    message = f"""🌅 Assalam-o-Alaikum & Good Morning!
+🚢 Future Admiral Family — Discipline is the Strategy.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+     ⚓ FUTURE ADMIRAL
+     MARKET INTELLIGENCE DESK
+     📅 {now}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+{briefing}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+📊 MARKET SNAPSHOT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🟠 BTC   ${btc['usd']:,}   {btc['usd_24h_change']:+.2f}%
+🔵 ETH   ${eth['usd']:,}    {eth['usd_24h_change']:+.2f}%
+🟣 SOL   ${sol['usd']:,}     {sol['usd_24h_change']:+.2f}%
+
+😨 Fear & Greed:  {fg_value} — {fg_label}
+   {bar}  Keep emotions in check!
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+{technical}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+{orders}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+{coin}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+🚢 Stay disciplined. Stay in the fleet.
+⚓ Future Admiral — Har Roz. Har Trade.
+🔔 Next update: Kal 9:00 AM PKT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"""
+
+    return message
+
+
+def send_to_discord(message):
+    webhook = os.environ['DISCORD_WEBHOOK']
+    print(f"Webhook URL being used: {webhook[:50]}...")
+    data = {
+        "content": message,
+        "username": "Future Admiral ⚓"
+    }
+    r = requests.post(webhook, json=data)
+    print(f"Discord status code: {r.status_code}")
+    print(f"Discord response: {r.text}")
+
+
+# --- Run ---
+print("Fetching prices...")
+prices = get_prices()
+
+print("Fetching Fear & Greed...")
+fg_value, fg_label = get_fear_greed()
+
+print("Getting AI analysis...")
+ai_text = get_ai_analysis(prices)
+
+print("Building message...")
+message = build_message(prices, fg_value, fg_label, ai_text)
+
+print("Sending to Discord...")
+send_to_discord(message)
+print("Done!")
