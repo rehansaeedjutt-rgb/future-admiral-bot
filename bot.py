@@ -17,57 +17,63 @@ def get_fear_greed():
     data = r.json()['data'][0]
     return data['value'], data['value_classification']
 
-def make_progress_bar(value):
-    filled = int(int(value) / 10)
-    empty = 10 - filled
-    return "█" * filled + "░" * empty
-
 def get_ai_analysis(prices):
     btc = prices['bitcoin']
     eth = prices['ethereum']
     sol = prices['solana']
 
-    prompt = f"""You are the admin of a crypto Discord channel called Future Admiral.
-Write a daily market update. Follow this EXACT format — do not add anything outside it.
+    prompt = f"""You are the admin of a crypto Discord channel called "Future Admiral".
+Write a daily market update in the EXACT style and structure shown below.
+Use the live data provided. Do NOT add anything outside this format.
 
-Today's data:
+Live Data:
 - BTC: ${btc['usd']:,} ({btc['usd_24h_change']:+.2f}%)
 - ETH: ${eth['usd']:,} ({eth['usd_24h_change']:+.2f}%)
 - SOL: ${sol['usd']:,} ({sol['usd_24h_change']:+.2f}%)
 
-FORMAT:
+EXACT FORMAT TO FOLLOW:
 
-👨‍✈️ CAPTAIN'S BRIEFING (Roman Urdu)
-▸ [BTC situation 2 lines Roman Urdu]
-▸ [OI/Funding rates warning Roman Urdu]
-▸ TRAP SE BACHEIN: [specific resistance level to watch]
+Assalam-o-Alaikum and Good Morning, my Future Admiral family! Hope you all are disciplined and sticking to the plan. Market is showing some interesting moves, let's break it down.
 
----SPLIT---
-
-🔬 TECHNICAL ANALYSIS
-🔴 Resistance → [level]
-🟢 Support    → [level]
-📉 Flush Zone → [level if support breaks]
-
-📌 Key Observations:
-- [TA point 1]
-- [BTC dominance impact on alts]
-- [RSI or momentum]
-- [Liquidity observation]
+FUTURE ADMIRAL | MARKET INTELLIGENCE
+━━━━━━━━━━━━━━━━━━━━━
 
 ---SPLIT---
 
-⚔️ ADMIRAL'S ORDERS
-✅ [action 1]
-✅ [action 2]
-✅ [action 3]
-❌ [warning 1]
-❌ [warning 2]
+ADMIN ADVICE (Roman Urdu)
+• [2-3 bullet points in Roman Urdu about current BTC situation, OI/Funding rates warning, and trap levels — exactly like a senior trader talking to his community]
 
 ---SPLIT---
 
-📡 COIN TO WATCH TODAY
-👀 [Coin name] — [2 line observation, key level to watch]"""
+CORE MARKET SNAPSHOT
+• Bitcoin (BTC): ${btc['usd']:,} ({btc['usd_24h_change']:+.2f}%)
+• Ethereum (ETH): ${eth['usd']:,} ({eth['usd_24h_change']:+.2f}%)
+• Solana (SOL): ${sol['usd']:,} ({sol['usd_24h_change']:+.2f}%)
+• Market Cap: [estimate]
+• BTC Dominance: [estimate]%
+
+---SPLIT---
+
+TECHNICAL ANALYSIS (English)
+• [3 bullet points — resistance/support zones, BTC dominance impact on alts, RSI and liquidity observations — confident senior trader tone]
+
+---SPLIT---
+
+STRATEGY
+• Leverage: [specific advice based on current market]
+• Stop-Loss: [specific SL levels based on current price]
+• [1 closing motivational line]
+
+Discipline is the key to Wealth.
+Future Admiral
+
+STRICT RULES:
+- Roman Urdu ONLY in Admin Advice section
+- English everywhere else
+- Bullet points with • symbol only
+- No emojis anywhere
+- Confident, senior trader tone throughout
+- Keep it concise exactly like the example"""
 
     headers = {
         "Authorization": f"Bearer {os.environ['OPENROUTER_KEY']}",
@@ -109,91 +115,81 @@ FORMAT:
 
 def get_fallback_analysis(prices):
     btc = prices['bitcoin']
+    eth = prices['ethereum']
+    sol = prices['solana']
     change = btc['usd_24h_change']
     direction = "upar" if change > 0 else "neeche"
 
-    return f"""👨‍✈️ CAPTAIN'S BRIEFING (Roman Urdu)
-▸ BTC ${btc['usd']:,} par trade kar raha hai, 24h mein {abs(change):.1f}% {direction} gaya hai. Market carefully observe karo.
-▸ Bina proper analysis ke trade mat karo — capital protect karna pehli priority hai.
-▸ TRAP SE BACHEIN: Sirf confirmed breakout par hi entry lo, emotion mein mat aao.
+    return f"""Assalam-o-Alaikum and Good Morning, my Future Admiral family! Hope you all are disciplined and sticking to the plan. Market is showing some interesting moves, let's break it down.
+
+FUTURE ADMIRAL | MARKET INTELLIGENCE
+━━━━━━━━━━━━━━━━━━━━━
 
 ---SPLIT---
 
-🔬 TECHNICAL ANALYSIS
-🔴 Resistance → Key levels monitor karein
-🟢 Support    → Recent lows watch karein
-📉 Flush Zone → Support break hone par caution
-
-📌 Key Observations:
-- Market volatility high — position sizing dhyan se karo
-- BTC Dominance high hone par Alts pe pressure rahega
-- RSI neutral zone mein — koi bhi side move possible
-- Volume confirmation zaroor dekho entry se pehle
+ADMIN ADVICE (Roman Urdu)
+• Dosto, BTC is waqt ${btc['usd']:,} ki range mein trade kar raha hai, 24 ghanton mein {abs(change):.1f}% {direction} gaya hai. Market ko carefully observe karo aur jaldi mein koi decision mat lo.
+• Bina proper analysis ke trade mat karo — capital protect karna pehli priority hai. Risk management ko kabhi ignore mat karo.
+• TRAP SE BACHEIN: Sirf confirmed breakout par hi entry lo. Apne jazbaat ko side par rakh kar sirf chart ko follow karein.
 
 ---SPLIT---
 
-⚔️ ADMIRAL'S ORDERS
-✅ Apna trading plan follow karo
-✅ Stop loss zaroor lagao
-✅ Small position size rakho
-❌ High leverage se door raho
-❌ FOMO mein entry mat lo
+CORE MARKET SNAPSHOT
+• Bitcoin (BTC): ${btc['usd']:,} ({btc['usd_24h_change']:+.2f}%)
+• Ethereum (ETH): ${eth['usd']:,} ({eth['usd_24h_change']:+.2f}%)
+• Solana (SOL): ${sol['usd']:,} ({sol['usd_24h_change']:+.2f}%)
+• Market Cap: ~$2.4T
+• BTC Dominance: ~55-57%
 
 ---SPLIT---
 
-📡 COIN TO WATCH TODAY
-👀 Bitcoin (BTC) — Key levels pe nazar rakho. Confirmation ke baad hi move karo."""
+TECHNICAL ANALYSIS (English)
+• BTC is trading at key levels. Watch for resistance and support zones carefully before making any entry. Volume confirmation is essential.
+• BTC Dominance remains elevated — this is a warning sign for Altcoins. If BTC sees any selling pressure, Alts will bleed significantly. Be cautious with altcoin positions.
+• RSI is in neutral territory, giving room for a move in either direction. Look for liquidity sweeps before any major directional move.
+
+---SPLIT---
+
+STRATEGY
+• Leverage: Strictly 3x to 5x. Avoid gambling in this choppy range.
+• Stop-Loss: Place your SLs below recent lows for long positions. Stay nimble and take profits early.
+• Discipline is the key to Wealth.
+
+Discipline is the key to Wealth.
+Future Admiral"""
 
 
 def build_message(prices, fg_value, fg_label, ai_text):
-    btc = prices['bitcoin']
-    eth = prices['ethereum']
-    sol = prices['solana']
-
     parts = ai_text.split("---SPLIT---")
-    briefing  = parts[0].strip() if len(parts) > 0 else ""
-    technical = parts[1].strip() if len(parts) > 1 else ""
-    orders    = parts[2].strip() if len(parts) > 2 else ""
-    coin      = parts[3].strip() if len(parts) > 3 else ""
 
-    bar = make_progress_bar(fg_value)
+    header   = parts[0].strip() if len(parts) > 0 else ""
+    advice   = parts[1].strip() if len(parts) > 1 else ""
+    snapshot = parts[2].strip() if len(parts) > 2 else ""
+    analysis = parts[3].strip() if len(parts) > 3 else ""
+    strategy = parts[4].strip() if len(parts) > 4 else ""
+
     now = datetime.now().strftime("%A, %d %B %Y")
 
-    message = f"""🌅 Assalam-o-Alaikum & Good Morning!
-🚢 Future Admiral Family — Discipline is the Strategy.
+    message = f"""{header}
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-     ⚓ FUTURE ADMIRAL
-     MARKET INTELLIGENCE DESK
-     📅 {now}
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+{advice}
 
-{briefing}
+━━━━━━━━━━━━━━━━━━━━━
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-📊 MARKET SNAPSHOT
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🟠 BTC   ${btc['usd']:,}   {btc['usd_24h_change']:+.2f}%
-🔵 ETH   ${eth['usd']:,}    {eth['usd_24h_change']:+.2f}%
-🟣 SOL   ${sol['usd']:,}     {sol['usd_24h_change']:+.2f}%
+{snapshot}
 
-😨 Fear & Greed:  {fg_value} — {fg_label}
-   {bar}  Keep emotions in check!
+Fear & Greed Index: {fg_value} — {fg_label}
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-{technical}
+━━━━━━━━━━━━━━━━━━━━━
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-{orders}
+{analysis}
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-{coin}
+━━━━━━━━━━━━━━━━━━━━━
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚢 Stay disciplined. Stay in the fleet.
-⚓ Future Admiral — Har Roz. Har Trade.
-🔔 Next update: Kal 9:00 AM PKT
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"""
+{strategy}
+
+━━━━━━━━━━━━━━━━━━━━━
+Date: {now}"""
 
     return message
 
@@ -203,7 +199,7 @@ def send_to_discord(message):
     print(f"Webhook URL being used: {webhook[:50]}...")
     data = {
         "content": message,
-        "username": "Future Admiral ⚓"
+        "username": "Future Admiral"
     }
     r = requests.post(webhook, json=data)
     print(f"Discord status code: {r.status_code}")
