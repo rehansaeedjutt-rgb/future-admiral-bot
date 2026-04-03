@@ -34,6 +34,7 @@ Live Data:
 EXACT FORMAT TO FOLLOW:
 
 🌅 Assalam-o-Alaikum and Good Morning, my Future Admiral family!
+
 Hope you all are disciplined and sticking to the plan.
 Market is showing some interesting moves, let's break it down.
 
@@ -122,7 +123,6 @@ Market is showing some interesting moves, let's break it down.
 • TRAP SE BACHEIN: Sirf confirmed candle close ke baad hi entry lo. Apne jazbaat ko side par rakh kar sirf chart ko follow karein.
 
 ---SPLIT---
-
 🔬 TECHNICAL ANALYSIS
 • 🔴 BTC facing key resistance — wait for confirmed breakout before entry, volume must step up.
 • 🟢 Watch support levels closely — losing key support could trigger a sharp flush downward.
@@ -146,7 +146,6 @@ def build_message(ai_text):
     message = f"""{header}
 
 {advice}
-
 
 
 {analysis}
