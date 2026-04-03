@@ -34,39 +34,41 @@ Live Data:
 EXACT FORMAT TO FOLLOW:
 
 🌅 Assalam-o-Alaikum and Good Morning, my Future Admiral family!
----SPLIT---
 Hope you all are disciplined and sticking to the plan.
 Market is showing some interesting moves, let's break it down.
 
 ⚓ FUTURE ADMIRAL | MARKET INTELLIGENCE
+━━━━━━━━━━━━━━━━━━━━━
 
 ---SPLIT---
 
-🎙️ ADMIN ADVICE (Roman Urdu)
-• [Roman Urdu — BTC current situation, 2 lines]
-• [Roman Urdu — OI/Funding rates warning]
-• [Roman Urdu — trap level to watch, start with "TRAP SE BACHEIN:"]
+🎙️ ADMIN ADVICE
+• [Roman Urdu line about BTC current situation]
+  ↳ [Same point in English translation]
+
+• [Roman Urdu line about OI/Funding rates warning]
+  ↳ [Same point in English translation]
+
+• TRAP SE BACHEIN: [Roman Urdu trap level warning]
+  ↳ [Same point in English translation]
 
 ---SPLIT---
 
 🔬 TECHNICAL ANALYSIS
-
-• 🔴 [Resistance zone observation]
-• 🟢 [Support level observation]
-• 📉 [BTC dominance impact on altcoins]
-• 📌 [RSI and liquidity observation]
+• 🔴 [Resistance zone observation in English]
+• 🟢 [Support level observation in English]
+• 📉 [BTC dominance impact on altcoins in English]
+• 📌 [RSI and liquidity observation in English]
 
 Discipline is the key to Wealth. ⚓
-
 — Future Admiral
 
 STRICT RULES:
-
-- Roman Urdu ONLY in Admin Advice section
-- English everywhere else
-- Use ONLY the emojis shown in the format above — no extra emojis
+- Admin Advice: Roman Urdu bullet, then English translation on next line starting with ↳
+- Technical Analysis: English only
+- Use ONLY the emojis shown in the format — no extra emojis
 - Confident, senior trader tone throughout
-- Keep it concise exactly like the example"""
+- Keep it concise"""
 
     headers = {
         "Authorization": f"Bearer {os.environ['OPENROUTER_KEY']}",
@@ -77,7 +79,7 @@ STRICT RULES:
     body = {
         "model": "mistralai/mistral-7b-instruct:free",
         "messages": [{"role": "user", "content": prompt}],
-        "max_tokens": 1000
+        "max_tokens": 1200
     }
 
     try:
@@ -110,21 +112,29 @@ def get_fallback_analysis(prices):
     btc = prices['bitcoin']
     change = btc['usd_24h_change']
     direction = "upar" if change > 0 else "neeche"
+    direction_en = "up" if change > 0 else "down"
 
     return f"""🌅 Assalam-o-Alaikum and Good Morning, my Future Admiral family!
 Hope you all are disciplined and sticking to the plan.
 Market is showing some interesting moves, let's break it down.
 
 ⚓ FUTURE ADMIRAL | MARKET INTELLIGENCE
+━━━━━━━━━━━━━━━━━━━━━
 
 ---SPLIT---
 
-🎙️ ADMIN ADVICE (Roman Urdu)
+🎙️ ADMIN ADVICE
 • Dosto, BTC is waqt ${btc['usd']:,} ki range mein trade kar raha hai, 24 ghanton mein {abs(change):.1f}% {direction} gaya hai. Market ko carefully observe karo.
+  ↳ BTC is currently trading at ${btc['usd']:,}, moved {abs(change):.1f}% {direction_en} in the last 24h. Observe the market carefully before acting.
+
 • Open Interest high hai aur Funding Rates positive hain — High Leverage longs se door raho, exchanges pehle unhe nikalte hain.
+  ↳ Open Interest is high and Funding Rates are positive — avoid high leverage longs, exchanges tend to wick them out first.
+
 • TRAP SE BACHEIN: Sirf confirmed candle close ke baad hi entry lo. Apne jazbaat ko side par rakh kar sirf chart ko follow karein.
+  ↳ Avoid the trap: only enter after a confirmed candle close. Keep emotions aside and follow the chart.
 
 ---SPLIT---
+
 🔬 TECHNICAL ANALYSIS
 • 🔴 BTC facing key resistance — wait for confirmed breakout before entry, volume must step up.
 • 🟢 Watch support levels closely — losing key support could trigger a sharp flush downward.
@@ -132,7 +142,6 @@ Market is showing some interesting moves, let's break it down.
 • 📌 RSI neutral — room for move in either direction. Liquidity sweep of recent lows likely before major upside.
 
 Discipline is the key to Wealth. ⚓
-
 — Future Admiral"""
 
 
@@ -149,10 +158,11 @@ def build_message(ai_text):
 
 {advice}
 
+━━━━━━━━━━━━━━━━━━━━━
 
 {analysis}
 
-
+━━━━━━━━━━━━━━━━━━━━━
 🗓️ {now}"""
 
     return message
