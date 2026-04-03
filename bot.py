@@ -34,7 +34,7 @@ Live Data:
 EXACT FORMAT TO FOLLOW:
 
 🌅 Assalam-o-Alaikum and Good Morning, my Future Admiral family!
-
+---SPLIT---
 Hope you all are disciplined and sticking to the plan.
 Market is showing some interesting moves, let's break it down.
 
@@ -50,6 +50,7 @@ Market is showing some interesting moves, let's break it down.
 ---SPLIT---
 
 🔬 TECHNICAL ANALYSIS
+
 • 🔴 [Resistance zone observation]
 • 🟢 [Support level observation]
 • 📉 [BTC dominance impact on altcoins]
@@ -60,6 +61,7 @@ Discipline is the key to Wealth. ⚓
 — Future Admiral
 
 STRICT RULES:
+
 - Roman Urdu ONLY in Admin Advice section
 - English everywhere else
 - Use ONLY the emojis shown in the format above — no extra emojis
