@@ -57,13 +57,6 @@ CORE MARKET SNAPSHOT
 TECHNICAL ANALYSIS (English)
 • [3 bullet points — resistance/support zones, BTC dominance impact on alts, RSI and liquidity observations — confident senior trader tone]
 
----SPLIT---
-
-STRATEGY
-• Leverage: [specific advice based on current market]
-• Stop-Loss: [specific SL levels based on current price]
-• [1 closing motivational line]
-
 Discipline is the key to Wealth.
 Future Admiral
 
@@ -148,13 +141,6 @@ TECHNICAL ANALYSIS (English)
 • BTC Dominance remains elevated — this is a warning sign for Altcoins. If BTC sees any selling pressure, Alts will bleed significantly. Be cautious with altcoin positions.
 • RSI is in neutral territory, giving room for a move in either direction. Look for liquidity sweeps before any major directional move.
 
----SPLIT---
-
-STRATEGY
-• Leverage: Strictly 3x to 5x. Avoid gambling in this choppy range.
-• Stop-Loss: Place your SLs below recent lows for long positions. Stay nimble and take profits early.
-• Discipline is the key to Wealth.
-
 Discipline is the key to Wealth.
 Future Admiral"""
 
@@ -166,7 +152,6 @@ def build_message(prices, fg_value, fg_label, ai_text):
     advice   = parts[1].strip() if len(parts) > 1 else ""
     snapshot = parts[2].strip() if len(parts) > 2 else ""
     analysis = parts[3].strip() if len(parts) > 3 else ""
-    strategy = parts[4].strip() if len(parts) > 4 else ""
 
     now = datetime.now().strftime("%A, %d %B %Y")
 
@@ -183,10 +168,6 @@ Fear & Greed Index: {fg_value} — {fg_label}
 ━━━━━━━━━━━━━━━━━━━━━
 
 {analysis}
-
-━━━━━━━━━━━━━━━━━━━━━
-
-{strategy}
 
 ━━━━━━━━━━━━━━━━━━━━━
 Date: {now}"""
